@@ -1,0 +1,34 @@
+doctype html
+html(lang='en')
+  head
+    title Express.JS -Homework
+    link(rel='stylesheet', href='/css/bootstrap.css')
+    link(rel='stylesheet', href='/css/style.css')
+    script(type='text/javascript').
+  body
+    .container
+      .header.clearfix
+        nav
+          ul.nav.nav-pills.pull-right
+            if user          
+              li.active(role='presentation')
+                a(href='/#') Dashboard
+            if !user
+              li(role='presentation')
+                a(href='/users/login') Login  
+              li(role='presentation')
+                a(href='/users/register') Regiser
+            else if user 
+              li(role='presentation')  
+                a(href='/users/logout') Logout
+              
+        h3.text-muted Express.JS Simple App
+            if success_msg.length >0
+              div.alert.alert-success #{success_msg}
+            if error_msg.length> 0
+              div.alert.alert-danger #{error_msg}
+            if error.length>0
+              div.alert.alert-danger #{error}     
+      block content
+      footer.footer
+        p © #{moment().format('YYYY')} SoftUni, Inc.
