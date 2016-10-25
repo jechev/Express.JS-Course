@@ -4,7 +4,7 @@ block  content
     if errors
         each error in errors
             div.alert.alert-danger #{error.msg}
-    form(action='/users/register' method='post')
+    form(action='/users/register' method='post' enctype='multipart/form-data')
         div.form-group
             label Name
             input.form-control(type='text' name='name' placeholder='Name')
@@ -17,4 +17,7 @@ block  content
         div.form-group
             label Confirm Password
             input.form-control(type='password' name='password2' placeholder='Confirm Password')
+        div.form-group
+            label Upload Avatar
+            input.form-control(type='file' name='avatar' accept="image/*")    
         button.btn.btn-default(type='submit') Register

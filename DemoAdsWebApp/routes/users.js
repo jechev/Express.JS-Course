@@ -1,5 +1,7 @@
 var express = require('express')
 var router = express.Router()
+var multer  = require('multer')
+var upload = multer({ dest: './public/uploads/' })
 var passport =require('passport')
 var LocalStrategy = require('passport-local').Strategy
 
@@ -9,11 +11,12 @@ router.get('/register', function(req, res){
     res.render('register')
 })
 
-router.post('/register', function(req, res){
+router.post('/register',upload.single('avatar'), function(req, res){
     var name = req.body.name
     var username = req.body.username
     var password = req.body.password
     var password2 = req.body.password2
+    var avatar = req.file
     //Validation 
     req.checkBody('name', 'Name is required').notEmpty()
     req.checkBody('username', 'Username is required').notEmpty()
@@ -29,12 +32,14 @@ router.post('/register', function(req, res){
         var newUser = new User({
             name: name,
             username: username,
-            password: password
+            password: password,
+            avatar: avatar
         })
         User.createUser(newUser, function(err,user){
             if(err) throw err
         })
         req.flash('success_msg', 'You are registered and can now login')
+
         res.redirect('/users/login')
     }
 

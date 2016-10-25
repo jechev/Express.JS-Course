@@ -11,7 +11,8 @@ var userSchema =mongoose.Schema({
     },
     name:{
         type:String
-    }
+    },
+    avatar:{}
 
 })
 var User = module.exports = mongoose.model('User', userSchema)

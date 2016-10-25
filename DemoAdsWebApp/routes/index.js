@@ -2,7 +2,10 @@ var express = require('express')
 var router = express.Router()
 
 router.get('/',ensureAuthenticated,function(req, res){
-    res.render('index')
+    var user = res.locals.user
+    console.log(user)
+    // res.setHeader('Content-Type',user.avatar.mimetype)
+    res.render('index',{user:user})
 })
 
 function ensureAuthenticated(req, res, next){
