@@ -15,7 +15,9 @@ html(lang='en')
                 a(href='/users/login') Login  
               li(role='presentation')
                 a(href='/users/register') Regiser
-            else if user 
+            else if user
+              li(role='presentation')
+                a(href='/article/add') Add Article             
               li.active(role='presentation')  
                 form#logout-form(method="post" action="/users/logout")
                   a.btn.btn-success(href="javascript:document.getElementById('logout-form').submit()") Logout

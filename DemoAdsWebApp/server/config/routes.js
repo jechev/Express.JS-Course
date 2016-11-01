@@ -9,7 +9,8 @@ module.exports = (app) => {
   app.get('/users/login', controllers.users.login)
   app.post('/users/login', passport.authenticate('local', { successRedirect: '/', failureRedirect: '/users/login', failureFlash: true }), controllers.users.authenticate)
   app.post('/users/logout', controllers.users.logout)
-
+  app.get('/article/add',auth.isAuthenticated, controllers.articles.add)
+  app.post('/article/add',auth.isAuthenticated, controllers.articles.create)
   // app.get('/articles/create', auth.isInRole('Admin'), controllers.articles.create)
 
   app.all('*', (req, res) => {

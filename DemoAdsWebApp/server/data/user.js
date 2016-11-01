@@ -1,5 +1,6 @@
 var mongoose = require('mongoose')
 var bcrypt = require('bcryptjs')
+var Article = require('./article')
 
 var userSchema = mongoose.Schema({
   username: {
@@ -12,7 +13,8 @@ var userSchema = mongoose.Schema({
   name: {
     type: String
   },
-  roles: [String]
+  roles: [String],
+  articles:[{type: mongoose.Schema.Types.ObjectId, ref: 'Article'}]
 
 })
 var User = module.exports = mongoose.model('User', userSchema)
