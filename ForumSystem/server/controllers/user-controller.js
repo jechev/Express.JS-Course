@@ -1,6 +1,5 @@
 const User = require('../data/user')
 
-
 module.exports = {
   register: (req, res) => {
     res.render('user/register')

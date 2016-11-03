@@ -1,0 +1,7 @@
+extend ../shared/layout
+block  content
+    h2.page-header List Thread Page
+    div.list-group
+      each thread in threads
+        a.list-group-item(href="/post/" + thread._id +"/" + thread.title) #{thread.title} - #{thread.author.username} 
+        

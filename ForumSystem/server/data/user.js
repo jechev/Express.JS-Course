@@ -1,18 +1,31 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcryptjs')
+const Thread = require('./thread')
+const Answer = require('./answer')
 
 var userSchema = mongoose.Schema({
   username: {
     type: String,
-    unique: true
+    unique: true,
+    required: true
   },
   password: {
-    type: String
+    type: String,
+    required: true
   },
   name: {
-    type: String
+    type: String,
+    required: true
   },
-  roles: [String]
+  roles: [String],
+  threads: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Thread'
+  }],
+  answers: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Answer'
+  }]
 })
 
 var User = module.exports = mongoose.model('User', userSchema)
