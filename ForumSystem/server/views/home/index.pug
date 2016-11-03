@@ -1,0 +1,6 @@
+extend ../shared/layout
+block  content
+  if user
+    h1 Hello #{currentUser.username}
+  else 
+    h1 Hello  

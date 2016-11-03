@@ -1,0 +1,32 @@
+doctype html
+html(lang="en")
+  head
+    title Express.JS -Homework
+    link(rel="stylesheet", href="/css/bootstrap.css")
+    link(rel="stylesheet", href="/css/style.css")
+    script(type="text/javascript")
+  body
+    .container
+      .header.clearfix
+        nav
+          ul.nav.nav-pills.pull-right
+            if !currentUser
+              li(role="presentation")
+                a(href="/user/login") Login  
+              li(role="presentation")
+                a(href="/user/register") Regiser
+            else if currentUser     
+              li.active(role="presentation")  
+                form#logout-form(method="post" action="/user/logout")
+                  a.btn.btn-success(href="javascript:document.getElementById('logout-form').submit()") Logout
+              
+        h3.text-muted Express.JS Simple App
+            if success_msg.length >0
+              div.alert.alert-success #{success_msg}
+            if error_msg.length> 0
+              div.alert.alert-danger #{error_msg}
+            if error.length>0
+              div.alert.alert-danger #{error}     
+      block content
+      footer.footer
+        p © #{moment().format("YYYY")} SoftUni, Inc.
