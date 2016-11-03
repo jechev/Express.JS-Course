@@ -15,6 +15,9 @@ module.exports = (app) => {
   app.get('/add', auth.isAuthenticated, controllers.thread.add)
   app.post('/add', auth.isAuthenticated, controllers.thread.create)
   app.get('/list', controllers.thread.listAll)
+  app.get('/post/:id/:title', controllers.thread.details)
+  // Answer Routes
+  app.post('/post/:id/:title/answer', auth.isAuthenticated, controllers.answer.create)
 
   // app.get('/articles/create', auth.isInRole('Admin'), controllers.articles.create)
 
@@ -24,3 +27,5 @@ module.exports = (app) => {
     res.end()
   })
 }
+
+

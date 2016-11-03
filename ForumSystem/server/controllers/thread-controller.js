@@ -30,10 +30,20 @@ module.exports = {
   },
   listAll: (req, res) => {
     Thread.find({})
-    .populate({path: 'answers', options: {sort: [['publishedDate', 'desc']]}})
+    .populate({path: 'answers'})
+    .populate
     .populate({path: 'author'})
     .then(threads => {
       res.render('thread/list', {threads})
+    })
+  },
+  details: (req, res) => {
+    var threadId = req.params.id
+    Thread.findById(threadId)
+    .populate({path: 'answers'})
+    .populate({path: 'author'})
+    .then(thread => {
+      res.render('thread/details', {thread})
     })
   }
 }

@@ -21,7 +21,8 @@ var threadSchema = mongoose.Schema({
   },
   answers: [{
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Answer'
+    ref: 'Answer',
+    default: []
   }]
 })
 

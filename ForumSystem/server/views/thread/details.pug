@@ -1,0 +1,16 @@
+extend ../shared/layout
+block  content
+    h2.page-header Details for #{thread.title}
+    blockquote
+      p #{thread.description}
+      footer #{thread.author.username} - #{thread.publishTime}
+    div.list-group
+    h4 Answers
+      each answer in thread.answers
+        pre #{answer.text} - user: #{answer.author}
+    if currentUser
+      form(action="/post/" + thread._id +"/" + thread.title + "/answer" method="post")
+          div.form-group
+              label Answer
+              textarea.form-control(name="text" rows="3" id="text") 
+          button.btn.btn-success(type="submit") Add Answer
