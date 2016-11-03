@@ -9,7 +9,19 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "bcryptjs": "2.3.0",
+    "body-parser": "1.15.2",
+    "connect-flash": "0.1.1",
+    "cookie-parser": "1.4.3",
     "express": "4.14.0",
-    "mongoose": "4.6.5"
+    "express-messages": "1.0.1",
+    "express-session": "1.14.2",
+    "express-validator": "2.21.0",
+    "mongoose": "4.6.5",
+    "passport": "0.3.2",
+    "passport-http": "0.3.0",
+    "passport-local": "1.0.0",
+    "pug": "2.0.0-beta6",
+    "standard": "8.5.0"
   }
 }
