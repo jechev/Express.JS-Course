@@ -10,6 +10,10 @@ html(lang="en")
       .header.clearfix
         nav
           ul.nav.nav-pills.pull-right
+            li(role="presentation")
+              a(href="/") Home
+            li(role="presentation")
+              a(href="/list") List All  
             if !currentUser
               li(role="presentation")
                 a(href="/user/login") Login  

@@ -1,4 +1,5 @@
 const Thread = require('../data/thread')
+const User = require('../data/user')
 
 module.exports = {
   add: (req, res) => {
@@ -8,6 +9,7 @@ module.exports = {
     if (req.user) {
       var title = req.body.title
       var description = req.body.description
+      var userId = req.user._doc._id
       // Validation
       req.checkBody('title', 'Title is required').notEmpty()
       req.checkBody('description', 'Description is required').notEmpty()
@@ -20,9 +22,18 @@ module.exports = {
         var newThread = new Thread({
           title: title,
           description: description,
-          author: req.user._doc._id
+          author: userId
         })
-        Thread.create(newThread)
+        Thread.create(newThread).then(thread => {
+          var threadId = thread._id
+          User.findByIdAndUpdate(
+          userId,
+          {$push: {'threads': threadId}},
+          {safe: true, upsert: true, new: true},
+          function (err, model) {
+            console.log(err)
+          })
+        })
         req.flash('success_msg', 'You added new thread')
         res.redirect('/list')
       }
@@ -32,6 +43,8 @@ module.exports = {
     Thread.find({})
     .populate({path: 'answers'})
     .populate({path: 'author'})
+    .sort({lastAnswerDate: 'desc'})
+    .exec()
     .then(threads => {
       res.render('thread/list', {threads})
     })
@@ -39,7 +52,7 @@ module.exports = {
   details: (req, res) => {
     var threadId = req.params.id
     Thread.findById(threadId)
-    .populate({path: 'answers'})
+    .populate({path: 'answers', options: {sort: { 'publishTime': 'asc' }}})
     .deepPopulate('answers.author', function (err, _authors) {
       if (err) throw err
     })

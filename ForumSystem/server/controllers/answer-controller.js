@@ -1,5 +1,6 @@
 const Answer = require('../data/answer')
 const Thread = require('../data/thread')
+const User = require('../data/user')
 module.exports = {
   create: (req, res) => {
     if (req.user) {
@@ -20,8 +21,14 @@ module.exports = {
         {safe: true, upsert: true, new: true},
         function (err, model) {
           console.log(err)
-        }
-    )
+        })
+        User.findByIdAndUpdate(
+          userId,
+          {$push: {'answers': answerId}},
+          {safe: true, upsert: true, new: true},
+          function (err, model) {
+            console.log(err)
+          })
       })
       req.flash('success_msg', 'You added new answer')
       res.redirect('/post/' + threadId + '/' + threadTitle)

@@ -1,6 +1,17 @@
 extend ../shared/layout
 block  content
-  if user
-    h1 Hello #{currentUser.username}
+  if currentUser
+    h1 Hello, #{currentUser.username}
   else 
-    h1 Hello  
+    h1 Hello
+  div.list-group
+      each thread in threads
+        div.list-group-item
+          if currentUser
+            a(href="/post/" + thread._id +"/" + thread.title) Title - #{thread.title}
+            br
+            a(href="/profile/" + thread.author.username) User - #{thread.author.username}
+          else
+            a(href="/post/" + thread._id +"/" + thread.title) Title - #{thread.title}
+            br
+            p User - #{thread.author.username} 
