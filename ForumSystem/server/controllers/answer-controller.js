@@ -16,7 +16,7 @@ module.exports = {
         var answerId = answer._id
         Thread.findByIdAndUpdate(
         threadId,
-        {$push: {'answers': answerId}},
+        {$push: {'answers': answerId}, $set: {'lastAnswerDate': Date.now()}},
         {safe: true, upsert: true, new: true},
         function (err, model) {
           console.log(err)

@@ -3,5 +3,10 @@ block  content
     h2.page-header List Thread Page
     div.list-group
       each thread in threads
-        a.list-group-item(href="/post/" + thread._id +"/" + thread.title) #{thread.title} - #{thread.author.username} 
+        div.list-group-item
+          a(href="/post/" + thread._id +"/" + thread.title) Title - #{thread.title}
+          br
+        if !currentUser
+          a(href="/profile/" + thread.author.username) User - #{thread.author.username}
+          
         

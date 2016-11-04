@@ -42,7 +42,6 @@ module.exports = {
     .populate({path: 'answers'})
     .deepPopulate('answers.author', function (err, _authors) {
       if (err) throw err
-      console.log(_authors)
     })
     .populate({path: 'author'})
     .then(thread => {

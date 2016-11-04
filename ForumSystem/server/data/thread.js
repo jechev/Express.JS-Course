@@ -19,6 +19,9 @@ var threadSchema = mongoose.Schema({
     type: Date,
     default: Date.now
   },
+  lastAnswerDate: {
+    type: Date
+  },
   answers: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Answer',
