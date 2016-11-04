@@ -31,7 +31,6 @@ module.exports = {
   listAll: (req, res) => {
     Thread.find({})
     .populate({path: 'answers'})
-    .populate
     .populate({path: 'author'})
     .then(threads => {
       res.render('thread/list', {threads})
@@ -41,6 +40,10 @@ module.exports = {
     var threadId = req.params.id
     Thread.findById(threadId)
     .populate({path: 'answers'})
+    .deepPopulate('answers.author', function (err, _authors) {
+      if (err) throw err
+      console.log(_authors)
+    })
     .populate({path: 'author'})
     .then(thread => {
       res.render('thread/details', {thread})

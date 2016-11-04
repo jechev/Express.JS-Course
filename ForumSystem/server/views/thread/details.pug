@@ -3,11 +3,11 @@ block  content
     h2.page-header Details for #{thread.title}
     blockquote
       p #{thread.description}
-      footer #{thread.author.username} - #{thread.publishTime}
+      footer #{thread.author.username} - #{thread.publishTime.toUTCString()}
     div.list-group
     h4 Answers
       each answer in thread.answers
-        pre #{answer.text} - user: #{answer.author}
+        pre #{answer.text} - user: #{answer.author.username} on Date: #{answer.publishTime.toUTCString()}
     if currentUser
       form(action="/post/" + thread._id +"/" + thread.title + "/answer" method="post")
           div.form-group
