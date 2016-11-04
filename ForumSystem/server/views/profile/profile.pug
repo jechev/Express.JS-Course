@@ -1,0 +1,22 @@
+extend ../shared/layout
+block  content
+  h2.page-header Details for #{user.username}
+  h3 #{user.username}'s Threads
+  div.list-group
+  if user.threads.length <=0
+    p No Threads
+  else
+    each thread in user.threads
+      div.list-group-item
+        a(href="/post/" + thread._id +"/" + thread.title) Title - #{thread.title}
+  h3 #{user.username}'s Answers
+  div.list-group
+  if user.answers.length <=0
+    p No Answers
+  else
+    each answer in user.answers
+      div.list-group-item
+        div "#{answer.text} " for Thread:
+        a(href="/post/" + answer.thread._id+"/"+answer.thread.title) #{answer.thread.title}
+  
+

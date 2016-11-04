@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const bcrypt = require('bcryptjs')
 const Thread = require('./thread')
 const Answer = require('./answer')
-
+const deepPopulate = require('mongoose-deep-populate')(mongoose)
 var userSchema = mongoose.Schema({
   username: {
     type: String,
@@ -27,7 +27,7 @@ var userSchema = mongoose.Schema({
     ref: 'Answer'
   }]
 })
-
+userSchema.plugin(deepPopulate)
 var User = module.exports = mongoose.model('User', userSchema)
 
 module.exports.createUser = function (newUser, callback) {

@@ -31,7 +31,7 @@ module.exports = {
           {$push: {'threads': threadId}},
           {safe: true, upsert: true, new: true},
           function (err, model) {
-            console.log(err)
+            if (err) throw err
           })
         })
         req.flash('success_msg', 'You added new thread')

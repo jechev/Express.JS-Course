@@ -6,8 +6,11 @@ module.exports = {
     User.findOne({'username': username})
     .populate({path: 'answers', options: {sort: { 'publishTime': 'desc' }}})
     .populate({path: 'threads', options: {sort: { 'publishTime': 'desc' }}})
+    .deepPopulate('answers.thread', function (err, _threads) {
+      if (err) throw err
+    })
     .then(user => {
-      console.log(user)
+      res.render('profile/profile', {user})
     })
   }
 }
