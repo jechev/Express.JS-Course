@@ -19,7 +19,7 @@ module.exports = (app) => {
   // Answer Routes
   app.post('/post/:id/:title/answer', auth.isAuthenticated, controllers.answer.create)
   // Profile Routes
-  app.get('/profile/:username', controllers.profile.profile)
+  app.get('/profile/:username', auth.isAuthenticated, controllers.profile.profile)
   // app.get('/articles/create', auth.isInRole('Admin'), controllers.articles.create)
 
   app.all('*', (req, res) => {
