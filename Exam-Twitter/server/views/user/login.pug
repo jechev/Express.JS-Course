@@ -1,0 +1,12 @@
+extend ../shared/layout
+block  content
+    h2.page-header Login Page
+    form(action="/user/login" method="post")
+        div.form-group
+            label Username
+            input.form-control(type="text" name="username" placeholder="Username")
+        div.form-group
+            label Password
+            input.form-control(type="password" name="password" placeholder="Password")
+        button.btn.btn-default(type="submit") Login  
+

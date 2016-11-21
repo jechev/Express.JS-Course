@@ -1,0 +1,13 @@
+extend ../shared/layout
+block  content
+  h2.page-header List All User
+  div.list-group
+    each user in users
+      div.list-group-item
+        a(href='/profile/' + user.username) #{user.username}
+        if user.roles.length >0
+          p Role:  #{user.roles[0]}
+        else 
+          form#admin-form(method="post" action="/admins/add/" + user._id)
+                  a.btn.btn-success(href="javascript:document.getElementById('admin-form').submit()") Make Admin
+      

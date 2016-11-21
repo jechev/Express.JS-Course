@@ -1,0 +1,11 @@
+extend ../shared/layout
+block  content
+    h2.page-header Add Tweet Page
+    if errors
+        each error in errors
+            div.alert.alert-danger #{error.msg}
+    form(action="/tweet" method="post")
+        div.form-group
+            label Text
+            input.form-control(type="text" name="text" placeholder="Text" id="text" maxLength="140")
+        button.btn.btn-success(type="submit") Add Tweet

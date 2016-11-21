@@ -1,0 +1,14 @@
+extend ../shared/layout
+block  content
+  h2.page-header List Tweets by tag - #{tag}
+  div.list-group
+    each tweet in tweets
+      div.list-group-item
+        p #{tweet.text}
+        a(href='/profile/' + tweet.author.username) #{tweet.author.username}
+        p Date : #{tweet.createdDate.toUTCString()}
+        p Tags : 
+          if tweet.tags 
+            each tag in tweet.tags
+              a(href="/tag/" + tag) #{tag} 
+    

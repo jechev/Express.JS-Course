@@ -1,0 +1,23 @@
+extend ../shared/layout
+block  content
+  if currentUser
+    h1 Hello, #{currentUser.username}
+  else 
+    h1 Hello
+  div.list-group
+    each tweet in tweets
+      div.list-group-item
+        p #{tweet.text}
+        a(href='/profile/' + tweet.author.username) #{tweet.author.username}
+        p Date : #{tweet.createdDate.toUTCString()}
+        p Tags : 
+          if tweet.tags 
+            each tag in tweet.tags
+              a(href="/tag/" + tag) #{tag} 
+            
+        if currentUser
+          if currentUser.roles[0]==='Admin'
+            form#delete-form(method="post" action="/tweet/delete/" + tweet._id )
+                  a.btn.btn-danger(href="javascript:document.getElementById('delete-form').submit()")  Delete
+            br        
+            a.btn.btn-success(href='/tweet/update/' + tweet.id) Update      
